@@ -194,7 +194,7 @@ describe("RxCommand", () => {
 
 	it("Execute async function called twice only once", async () => {
 		let executionCount = 0;
-		const command = RxCommand.create<string>(async (s) => {
+		const command = RxCommand.create<string, string>(async (s) => {
 			executionCount++;
 			await delay(100);
 			return s;

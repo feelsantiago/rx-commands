@@ -15,16 +15,98 @@
 	<img alt="💪 TypeScript: Strict" src="https://img.shields.io/badge/%F0%9F%92%AA_typescript-strict-21bb42.svg" />
 </p>
 
+`RxCommand` is an [_Reactive Extensions_ (Rx)](http://reactivex.io/) based abstraction for event handlers. It is based on `ReactiveCommand` for the [ReactiveUI](https://reactiveui.net/) framework and [RxCommand Flutter Package](https://pub.dev/packages/rx_command).
+
+`RxCommand` capsules a given handler function that can then be executed by its `execute` method or directly call because it's a callable class. The result of this method is then published through its Observable interface. Additionally it offers Observables for it's current execution state, if the command can be executed and for all possibly thrown exceptions during command execution.
+
+```ts
+const command = RxCommand.create<int, string>((myInt) => "$myInt");
+
+command.subscribe((s) => print(s)); // Setup the listener that now waits for events, not doing anything
+
+// Somwhere else
+command.execute(10); // the listener will print "10"
+
+// or
+command(10);
+```
+
 ## Usage
 
 ```shell
 npm i rx-commands
+
 ```
 
-```ts
-import { greet } from "rx-commands";
+An `RxCommand` is a generic class of type `RxCommand<TParam = void, TResult = void>` where `TParam` is the type of data that is passed when calling `execute` and `TResult` denotes the return type of the handler function. To signal that a handler doesn't take a parameter or returns a `null` value use `void` as type.
+Even if you create a `RxCommand<void,void>` you will receive a `null` value when the wrapped function finishes so you can listen for the successful completion.
 
-greet("Hello, world! 💖");
+An example of the declaration
+
+```ts
+RxCommand < string, List < WeatherEntry >> updateWeatherCommand;
+RxCommand < bool, bool > switchChangedCommand;
+```
+
+- `updateWeatherCommand` expects a handler that takes a `string` as parameter and returns a `List<WeatherEntry>`.
+- `switchChangedCommand` expects and returns a `bool` value.
+
+### Creating RxCommands
+
+You can create commands that are sync, async (returns promises) or from observables.
+
+```ts
+const commandSync = RxCommand.create((myInt) => "$myInt");
+const commandNoResult = RxCommand.create<void>(() => {
+	// Do Something
+});
+const commandNoParam = RxCommand.createNoParam<number>(() => {
+	return 1;
+});
+const commandNoParamNoReturn = RxCommand.create<void, void>(() => {
+	// Do something
+});
+const commandAsync = RxCommand.create(async () => {
+	// do async
+});
+const commandFromObservable = RxCommand.create(() => of(1, 2, 3));
+```
+
+### Options
+
+```ts
+const command = RxCommand.create(() => {
+    throw new Error("Something went wrong");
+}, {
+	restriction?: Observable<boolean>;
+	emitInitialCommandResult?: boolean;
+	emitLastResult?: boolean;
+	emitsLastValueToNewSubscriptions?: boolean;
+	initialLastResult?: TResult;
+	debugName?: string;
+});
+```
+
+| Option                           | Description                                                                                                      |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| restriction                      | An observable that will determine if the command can be executed.                                                |
+| emitInitialCommandResult         | Emit the result of the command when the command is created.                                                      |
+| emitsLastValueToNewSubscriptions | Use a Behavior Subject to emit values to new subscriptions                                                       |
+| emitLastResult                   | Will include the value of the last successful execution in all [CommandResult] events unless there is no result. |
+| initialLastResult                | sets the value of the [lastResult] property before the first item was received.                                  |
+
+### Error handling with RxCommands
+
+All exceptions thrown by the wrapped function will be caught and redirected to `throwExceptions` observable. If you want to react on the, you can listen on the `thrownException` property.
+
+```ts
+const command = RxCommand.create(() => {
+	throw new Error("Something went wrong");
+});
+
+command.thrownExceptions.subscribe((e) => {
+	console.error(e);
+});
 ```
 
 ## Development

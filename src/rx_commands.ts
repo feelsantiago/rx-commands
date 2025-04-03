@@ -230,7 +230,7 @@ export class RxCommand<TParam = void, TResult = void>
 				config.emitInitialCommandResult!,
 			config.emitInitialCommandResult!,
 			config.debugName,
-			config.result as TResult,
+			config.initialLastResult as TResult,
 		);
 	}
 
