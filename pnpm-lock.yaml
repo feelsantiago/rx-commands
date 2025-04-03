@@ -7,6 +7,16 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@hirez_io/observer-spy':
+        specifier: ^2.2.0
+        version: 2.2.0(rxjs@7.8.2)(typescript@5.8.2)
+      rxjs:
+        specifier: ^7.8.2
+        version: 7.8.2
+      ts-pattern:
+        specifier: ^5.7.0
+        version: 5.7.0
     devDependencies:
       '@eslint/js':
         specifier: 9.22.0
@@ -288,6 +298,12 @@ packages:
   '@eslint/plugin-kit@0.2.8':
     resolution: {integrity: sha512-ZAoA40rNMPwSm+AeHpCq8STiNAwzWLJuP8Xv4CHIc9wv/PSuExjMrmjfYNj682vW0OOiZ1HKxzvjQr9XZIisQA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@hirez_io/observer-spy@2.2.0':
+    resolution: {integrity: sha512-G9nv87vjRILgB/X1AtKBv1DZX7yXSYAOCXon/f+QULKoXVhVehYUF5Lv0SQ97ebf1sA48Z2CyQ9h2v4Pz6DgaQ==}
+    peerDependencies:
+      rxjs: '>=6.0.0'
+      typescript: '>=2.8.1'
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -2276,6 +2292,9 @@ packages:
   ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
 
+  ts-pattern@5.7.0:
+    resolution: {integrity: sha512-0/FvIG4g3kNkYgbNwBBW5pZBkfpeYQnH+2AA3xmjkCAit/DSDPKmgwC3fKof4oYUq6gupClVOJlFl+939VRBMg==}
+
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
@@ -2681,6 +2700,11 @@ snapshots:
     dependencies:
       '@eslint/core': 0.13.0
       levn: 0.4.1
+
+  '@hirez_io/observer-spy@2.2.0(rxjs@7.8.2)(typescript@5.8.2)':
+    dependencies:
+      rxjs: 7.8.2
+      typescript: 5.8.2
 
   '@humanfs/core@0.19.1': {}
 
@@ -4690,6 +4714,8 @@ snapshots:
       typescript: 5.8.2
 
   ts-interface-checker@0.1.13: {}
+
+  ts-pattern@5.7.0: {}
 
   tslib@2.8.1: {}
 
