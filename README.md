@@ -41,7 +41,7 @@ Thanks! 💖
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href=""><img src="https://avatars.githubusercontent.com/u/18483175?v=4?s=100" width="100px;" alt="Filipe Santiago"/><br /><sub><b>Filipe Santiago</b></sub></a><br /><a href="https://github.com/JoshuaKGoldberg/create-typescript-app/commits?author=feelsantiago" title="Code">💻</a>  <a href="https://github.com/JoshuaKGoldberg/create-typescript-app/commits?author=feelsantiago" title="Documentation">📖</a> <a href="#ideas-feelsantiago" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-feelsantiago" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-feelsantiago" title="Maintenance">🚧</a>  <a href="#tool-feelsantiago" title="Tools">🔧</a></td>
+      <td align="center" valign="top" width="14.28%"><img src="https://avatars.githubusercontent.com/u/18483175?v=4?s=100" width="100px;" alt="Filipe Santiago"/><br /><sub><b>Filipe Santiago</b></sub><br /><a href="https://github.com/feelsantiago/rx-commands/commits?author=feelsantiago" title="Code">💻</a> <a href="#content-feelsantiago" title="Content">🖋</a> <a href="https://github.com/feelsantiago/rx-commands/commits?author=feelsantiago" title="Documentation">📖</a> <a href="#ideas-feelsantiago" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-feelsantiago" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-feelsantiago" title="Maintenance">🚧</a> <a href="#projectManagement-feelsantiago" title="Project Management">📆</a> <a href="#tool-feelsantiago" title="Tools">🔧</a></td>
     </tr>
   </tbody>
 </table>

@@ -20,5 +20,8 @@
 	],
 	"contributorsSortAlphabetically": true,
 	"projectName": "rx-commands",
-	"projectOwner": "feelsantiago"
+	"projectOwner": "feelsantiago",
+	"repoType": "github",
+	"commitConvention": "angular"
 }
+
