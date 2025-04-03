@@ -190,6 +190,23 @@ export class RxCommand<TParam = void, TResult = void>
 		}
 	}
 
+	/**
+	 * Creates a RxCommand from a sync function, a async function or an "one time" observable.
+	 * [provider]: provider function that returns a value, a Promise or a Observable that will be subscribed on the call of [execute]
+	 * [restriction] : observable that can be used to enable/disable the command based on some other state change
+	 * if omitted the command can be executed always except it's already executing
+	 * [isExecuting] will issue a `bool` value on each state change. Even if you
+	 * subscribe to a newly created command it will issue `false`
+	 * For the `Observable<CommandResult>` that [RxCommand] publishes in [results] this normally doesn't make sense
+	 * if you want to get an initial Result with `data==null, error==null, isExecuting==false` pass
+	 * [emitInitialCommandResult=true].
+	 * [emitLastResult] will include the value of the last successful execution in all [CommandResult] events unless there is no result.
+	 * By default the [results] Observable and the [RxCommand] itself behave like a Subject. If you want that it acts like
+	 * a BehaviourSubject, meaning every listener gets the last received value, you can set [emitsLastValueToNewSubscriptions = true].
+	 * [initialLastResult] sets the value of the [lastResult] property before the first item was received.
+	 * [debugName] optional identifier that is included when you register a [globalExceptionHandler]
+	 * or a [loggingHandler]
+	 */
 	public static create<TParam = void, TResult = void>(
 		action:
 			| Action<TParam, TResult>
@@ -217,6 +234,23 @@ export class RxCommand<TParam = void, TResult = void>
 		);
 	}
 
+	/**
+	 * Helper for create a RxCommand from a sync function, a async function or an "one time" observable without param inputs but with return type.
+	 * [provider]: provider function that returns a value, a Promise or a Observable that will be subscribed on the call of [execute]
+	 * [restriction] : observable that can be used to enable/disable the command based on some other state change
+	 * if omitted the command can be executed always except it's already executing
+	 * [isExecuting] will issue a `bool` value on each state change. Even if you
+	 * subscribe to a newly created command it will issue `false`
+	 * For the `Observable<CommandResult>` that [RxCommand] publishes in [results] this normally doesn't make sense
+	 * if you want to get an initial Result with `data==null, error==null, isExecuting==false` pass
+	 * [emitInitialCommandResult=true].
+	 * [emitLastResult] will include the value of the last successful execution in all [CommandResult] events unless there is no result.
+	 * By default the [results] Observable and the [RxCommand] itself behave like a Subject. If you want that it acts like
+	 * a BehaviourSubject, meaning every listener gets the last received value, you can set [emitsLastValueToNewSubscriptions = true].
+	 * [initialLastResult] sets the value of the [lastResult] property before the first item was received.
+	 * [debugName] optional identifier that is included when you register a [globalExceptionHandler]
+	 * or a [loggingHandler]
+	 */
 	public static createNoParam<TResult, TParam = void>(
 		action:
 			| Action<TParam, TResult>
