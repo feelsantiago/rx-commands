@@ -14,7 +14,7 @@ export type ObservableAction<TParam = void, TResult = void> = (
  * [emitLastResult] will include the value of the last successful execution in all [CommandResult] events unless there is no result.
  * By default the [results] Observable and the [RxCommand] itself behave like a Subject. If you want that it acts like
  * a BehaviourSubject, meaning every listener gets the last received value, you can set [emitsLastValueToNewSubscriptions = true].
- * [initialLastResult] sets the value of the [lastResult] property before the first item was received. This is helpful if you use
+ * [initialLastResult] sets the value of the [lastResult] property before the first item was received.
  * [lastResult] as `initialData` of a `StreamBuilder`
  * [debugName] optional identifier that is included when you register a [globalExceptionHandler]
  * or a [loggingHandler]
