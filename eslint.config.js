@@ -25,6 +25,16 @@ export default tseslint.config(
 	{
 		extends: [vitest.configs.recommended],
 		files: ["**/*.test.*"],
-		rules: { "@typescript-eslint/no-unsafe-assignment": "off" },
+		rules: {
+			"@typescript-eslint/no-unsafe-assignment": "off",
+		},
+	},
+	{
+		rules: {
+			"@typescript-eslint/restrict-template-expressions": "off",
+			"@typescript-eslint/no-confusing-void-expression": "off",
+			"@typescript-eslint/no-non-null-assertion": "off",
+			"@typescript-eslint/no-unsafe-call": "off",
+		},
 	},
 );
