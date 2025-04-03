@@ -217,6 +217,16 @@ export class RxCommand<TParam = void, TResult = void>
 		);
 	}
 
+	public static createNoParam<TResult, TParam = void>(
+		action:
+			| Action<TParam, TResult>
+			| AsyncAction<TParam, TResult>
+			| ObservableAction<TParam, TResult>,
+		options?: RxCommandOptions<TResult>,
+	): RxCommand<TParam, TResult> {
+		return RxCommand.create<TParam, TResult>(action, options);
+	}
+
 	public subscribe(
 		observer:
 			| Partial<Observer<TResult>>
