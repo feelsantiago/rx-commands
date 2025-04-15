@@ -16,7 +16,7 @@ export class RxListener {
 	/**
 	 * Global handle to enable/disable logging of [RxCommand] errors
 	 */
-	public static canLogCommandErrors = true;
+	public static listenToCommandExceptions = true;
 
 	public set sink(reference: Subscription | RxCommand<any, any>) {
 		this.add([reference]);
@@ -53,7 +53,7 @@ export class RxListener {
 		command: RxCommand<any, any>,
 	): Subscription {
 		return command.thrownExceptions
-			.pipe(filter(() => RxListener.canLogCommandErrors))
+			.pipe(filter(() => RxListener.listenToCommandExceptions))
 			.subscribe((error) => console.error(error));
 	}
 }

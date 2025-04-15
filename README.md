@@ -109,6 +109,34 @@ command.thrownExceptions.subscribe((e) => {
 });
 ```
 
+### Listener Sink
+
+You can use `RxListener` class to handle observables and commands subscriptions.
+
+```ts
+import { RxListener } from 'rx-commands';
+
+const listeners = new RxListener();
+const myObservable = of(1);
+const myCommnad = RxCommand.create(() => 1);
+
+
+listeners.sink = myObservable.subscribe(...);
+listeners.sink = myCommand;
+
+// add more than one at time
+listeners.add([subscription1, subscription2, command1, command2]);
+
+// Will close all subscriptions and commands
+listeners.dispose();
+```
+
+`RxListener` will subscribe to command `thrownExceptions` observable and log all errors to `console.error`. You can disable this behavior gloabaly by setting `RxListener.canLogCommandExceptions = false;`
+
+```ts
+RxListener.canLogCommandExceptions = false;
+```
+
 ## Development
 
 See [`.github/CONTRIBUTING.md`](./.github/CONTRIBUTING.md), then [`.github/DEVELOPMENT.md`](./.github/DEVELOPMENT.md).
