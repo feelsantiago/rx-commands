@@ -23,13 +23,17 @@ export class RxListener {
 
 	public add(references: (Subscription | RxCommand)[]): void {
 		for (const reference of references) {
-			match(reference)
+			// casting to unknow because of circular reference error
+			// see https://github.com/gvergnaud/ts-pattern/issues/315
+			match(reference as unknown)
 				.with(P.instanceOf(Subscription), (subscription) =>
 					this._listners.add(subscription),
 				)
 				.with(P.instanceOf(RxCommand), (command) => {
-					const subscription = this._listenToCommandExceptions(command);
-					this._commands.push(command);
+					const subscription = this._listenToCommandExceptions(
+						command as RxCommand,
+					);
+					this._commands.push(command as RxCommand);
 					this._listners.add(subscription);
 				});
 		}
