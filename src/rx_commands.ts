@@ -108,24 +108,20 @@ export class RxCommand<TParam = void, TResult = void>
 
 	/**
 	 * optional hander that will get called on any exception that happens inside
-	 * any Command of the app. Ideal for logging. [commandName]
-	 * the [debugName] of the Command
+	 * any Command of the app. Ideal for logging.
 	 */
 	public static globalExceptionHandler?: (
-		commandName?: string,
 		error?: CommandError<unknown>,
 	) => void;
 
 	/**
-	 * optional handler that will get called on all `Command` executions. [commandName]
-	 * the [debugName] of the Command
+	 * optional handler that will get called on all `Command` executions.
 	 */
 	public static loggingHandler?: (
-		commandName?: string,
 		result?: CommandResult<unknown, unknown>,
 	) => void;
 
-	private constructor(
+	constructor(
 		private readonly _action:
 			| Action<TParam, TResult>
 			| AsyncAction<TParam, TResult>
@@ -149,7 +145,9 @@ export class RxCommand<TParam = void, TResult = void>
 		this._sink = this._commandResultsSubject
 			.pipe(filter((x) => x.hasError))
 			.subscribe((x) =>
-				this._thrownExceptionsSubject.next(new CommandError(x.param, x.error)),
+				this._thrownExceptionsSubject.next(
+					new CommandError(x.param, x.error, this._debugName),
+				),
 			);
 
 		this._sink = this._commandResultsSubject.subscribe((x) =>
@@ -164,7 +162,7 @@ export class RxCommand<TParam = void, TResult = void>
 							error: (error) => {
 								if (error instanceof Error) {
 									this._thrownExceptionsSubject.next(
-										new CommandError<TParam>(undefined, error),
+										new CommandError<TParam>(undefined, error, this._debugName),
 									);
 								}
 							},
@@ -351,15 +349,14 @@ export class RxCommand<TParam = void, TResult = void>
 
 	private _logger(result: CommandResult<TParam, TResult>): void {
 		if (RxCommand.loggingHandler != undefined) {
-			RxCommand.loggingHandler(this._debugName, result);
+			RxCommand.loggingHandler(result);
 		}
 	}
 
 	private _debug(param: TParam, error: Error): void {
 		if (RxCommand.globalExceptionHandler != null) {
 			RxCommand.globalExceptionHandler(
-				this._debugName,
-				new CommandError(param, error),
+				new CommandError(param, error, this._debugName),
 			);
 		}
 	}

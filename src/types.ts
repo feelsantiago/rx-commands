@@ -26,3 +26,7 @@ export interface RxCommandOptions<TResult = void> {
 	initialLastResult?: TResult;
 	debugName?: string;
 }
+
+export function nameOf(func: () => unknown): string {
+	return func.toString().replace(/[ |()=>]/g, "");
+}
