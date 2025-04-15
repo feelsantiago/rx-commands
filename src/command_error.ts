@@ -8,6 +8,7 @@ export class CommandError<TParam = void> {
 	public constructor(
 		public readonly param: TParam | undefined,
 		public readonly error: Error | undefined,
+		public readonly name?: string,
 	) {}
 
 	public equals(other: CommandError<TParam>): boolean {
