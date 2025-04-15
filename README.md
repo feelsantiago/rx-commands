@@ -109,7 +109,7 @@ command.thrownExceptions.subscribe((e) => {
 });
 ```
 
-### Listener Sink
+### RxListener Sink
 
 You can use `RxListener` class to handle observables and commands subscriptions.
 
